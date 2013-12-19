@@ -1,0 +1,16 @@
+@import "foundation/foundation";
+@import "foundation/normalize";
+
+.title-area {
+	li.name {
+		h1 {
+			color: white;
+			padding:0 15px;
+			font-size:1.0625rem;
+		}
+	}
+}
+
+.form-panel {
+	margin-top:15px;
+}
