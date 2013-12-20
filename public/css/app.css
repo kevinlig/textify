@@ -8276,3 +8276,20 @@ table {
 .form-panel {
   margin-top: 15px;
 }
+
+/* line 18, ../../sass/app.scss */
+.credits {
+  font-size: 0.8em;
+}
+
+/* line 22, ../../sass/app.scss */
+.screenshot {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 28, ../../sass/app.scss */
+.hiddenAlert {
+  display: none !important;
+}

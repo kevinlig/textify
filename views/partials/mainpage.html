@@ -1,7 +1,7 @@
 <h3>Textify</h3>
 <p class="subheader">
 	<b>Textify</b> pulls plain text content from Storify tweets so you can use them in whatever you want.<br />
-	<small>Textify requires a Storify URL. Using an embedded Storify feed? <a href="">Find out how to get the Storify URL.</a></small>
+	<small>Textify requires a Storify URL. Using an embedded Storify feed? <a href="#" data-reveal-id="embedded-help">Find out how to get the Storify URL.</a></small>
 </p>
 
 
@@ -9,11 +9,22 @@
 	<div class="small-12 medium-6 columns medium-centered">
 		<div class="panel radius form-panel">
 			<h3>Retrieve Storify Feed</h3>
+			<div data-alert class="alert-box warning radius hiddenAlert" id="error-msg">
+			</div>
 			<p class="subheader">Enter the Storify feed's <b>storify.com</b> URL.</p>
 			<form id="storifyRequest" data-abide>
-				<label for="storify_url">Storify URL:</label>
-				<input type="text" id="storify_url" required placeholder="http://storify.com/username/name-of-story" />
-				<small class="error">A Storify URL is required.</small>
+				<div id="url-field">
+					<label for="storify_url">Storify URL:</label>
+					<input type="text" id="storify_url" required placeholder="http://storify.com/username/name-of-story" />
+					<small class="error">A Storify URL is required.</small>
+				</div>
+
+				<label>Include these fields:</label>
+				<input type="checkbox" id="tweet-real-name" checked="checked" /><label for="tweet-real-name">Real Name</label><br />
+				<input type="checkbox" id="tweet-handle" checked="checked" /><label for="tweet-handle">Twitter @Handle</label><br />
+				<input type="checkbox" id="tweet-time" checked="checked" /><label for="tweet-time">Post Time</label><br />
+				<input type="checkbox" id="tweet-link" /><label for="tweet-link">Link to Source</label><br />
+
 				<button type="submit" class="radius">Retrieve</button>
 			</form>
 		</div>
@@ -21,3 +32,15 @@
 </div>
 
 <div id="storify-output"></div>
+
+
+<div id="embedded-help" class="reveal-modal" data-reveal>
+	<h3>Embedded Storify Feeds</h3>
+	<p>You can get the URL for an embedded Storify feed by clicking on the Storify logo in the top right corner of the Storify widget.</p>
+
+	<img src="img/storify_screenshot.png" alt="Storify embed screenshot" class="screenshot" />
+
+	<p>This will take you to the Storify web site. Copy this Storify page's URL into the Storify URL field in Textify.</p>
+
+	<a class="close-reveal-modal">&#215;</a>
+</div>
