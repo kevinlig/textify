@@ -23,6 +23,8 @@ module.exports = function(app) {
 		configuration = req.body;
 		finalResponse = res;
 		initialRequest = req;
+
+		console.log(process.env.NODE_ENV);
 		
 		// reset the data holding objects
 		storifyElements = {};
@@ -194,8 +196,12 @@ module.exports = function(app) {
 
 
 	function twitterAuthorization() {
+		console.log(process.env.NODE_ENV);
+		return "";
 		// we need to get our application twitter credentials
 		if (process.env.NODE_ENV == "development") {
+			
+			return "";
 			// read the credential file, but only if development environment
 			var rawCredentials = fs.readFileSync('credentials/credentials.json', 'utf8');
 			var credentials = JSON.parse(rawCredentials);
@@ -203,7 +209,7 @@ module.exports = function(app) {
 		}
 		else {
 			// we're in production, twitter authorization is an environment variable
-			console.log(process.env.TWIITERAUTH);
+			
 			return process.env.TWIITERAUTH;
 		}
 	}
