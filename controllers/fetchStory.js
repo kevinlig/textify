@@ -201,16 +201,14 @@ module.exports = function(app) {
 	function twitterAuthorization() {
 		// we need to get our application twitter credentials
 		if (environmentType == "development") {
-			console.log(environmentType);
 			// read the credential file, but only if development environment
 			var rawCredentials = fs.readFileSync('credentials/credentials.json', 'utf8');
 			var credentials = JSON.parse(rawCredentials);
-			//return credentials.bearer;
+			return credentials.bearer;
 		}
 		else {
 			// we're in production, twitter authorization is an environment variable
-			console.log(twitterAPIKey);
-			//return twitterAPIKey;
+			return twitterAPIKey;
 		}
 	}
 
