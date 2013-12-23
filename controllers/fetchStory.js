@@ -19,12 +19,15 @@ module.exports = function(app) {
 	var twitterAPICalls = 180;
 	var twitterAPIReset = 0;
 
+	var environmentType = process.env.NODE_ENV;
+	var twitterAPIKey = process.env.TWITTERAUTH;
+
 	app.post("/fetchStory", function(req,res) {
 		configuration = req.body;
 		finalResponse = res;
 		initialRequest = req;
 
-		console.log(process.env.NODE_ENV);
+
 		
 		// reset the data holding objects
 		storifyElements = {};
@@ -196,21 +199,18 @@ module.exports = function(app) {
 
 
 	function twitterAuthorization() {
-		console.log(process.env.NODE_ENV);
-		return "";
 		// we need to get our application twitter credentials
-		if (process.env.NODE_ENV == "development") {
-			
-			return "";
+		if (environmentType == "development") {
+			console.log(environmentType);
 			// read the credential file, but only if development environment
 			var rawCredentials = fs.readFileSync('credentials/credentials.json', 'utf8');
 			var credentials = JSON.parse(rawCredentials);
-			return credentials.bearer;
+			//return credentials.bearer;
 		}
 		else {
 			// we're in production, twitter authorization is an environment variable
-			
-			return process.env.TWIITERAUTH;
+			console.log(twitterAPIKey);
+			//return twitterAPIKey;
 		}
 	}
 
