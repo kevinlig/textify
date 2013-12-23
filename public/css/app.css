@@ -8293,3 +8293,64 @@ table {
 .hiddenAlert {
   display: none !important;
 }
+
+/* line 33, ../../sass/app.scss */
+.tabs dd {
+  border: 1px solid #efefef;
+}
+
+/* line 38, ../../sass/app.scss */
+.tabs-content {
+  border-top: 1px solid #efefef;
+}
+
+/* line 42, ../../sass/app.scss */
+#spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+/* line 47, ../../sass/app.scss */
+#spinner .spinner {
+  top: -10px;
+  left: -10px;
+}
+
+/* line 54, ../../sass/app.scss */
+button.disabled {
+  background-color: #838383 !important;
+  opacity: 0.5 !important;
+}
+
+/* line 61, ../../sass/app.scss */
+ul.tweets {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+/* line 65, ../../sass/app.scss */
+ul.tweets li {
+  margin-top: 5px;
+  padding: 10px 0px;
+  border-bottom: #efefef;
+}
+/* line 70, ../../sass/app.scss */
+ul.tweets li:first-child {
+  margin-top: 0px;
+}
+/* line 74, ../../sass/app.scss */
+ul.tweets li:nth-child(odd) {
+  background-color: #efefef;
+}
+/* line 78, ../../sass/app.scss */
+ul.tweets li .row, ul.tweets li .tweet-text, ul.tweets li .tweet-link {
+  padding: 0px 10px;
+}
+/* line 81, ../../sass/app.scss */
+ul.tweets li .tweet-time {
+  text-align: right;
+}
+/* line 85, ../../sass/app.scss */
+ul.tweets li .row, ul.tweets li .tweet-link {
+  font-size: 0.8em;
+}

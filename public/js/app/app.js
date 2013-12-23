@@ -8,8 +8,9 @@ define([
 function($,Backbone,_, ConfigurationView) {
 
 	function App () {
-		// our Backbone app object will hold models and views
+		// our Backbone app object will hold models, collections, and views
 		this.views = this.views || {};
+		this.collections = this.collections || {};
 		this.models = this.models || {};
 
 		// now let's init the app

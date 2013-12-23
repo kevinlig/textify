@@ -15,23 +15,51 @@
 			<form id="storifyRequest" data-abide>
 				<div id="url-field">
 					<label for="storify_url">Storify URL:</label>
-					<input type="text" id="storify_url" required placeholder="http://storify.com/username/name-of-story" />
+					<input type="text" id="storify_url" required placeholder="http://storify.com/username/name-of-story" tabindex="1" />
 					<small class="error">A Storify URL is required.</small>
 				</div>
 
 				<label>Include these fields:</label>
-				<input type="checkbox" id="tweet-real-name" checked="checked" /><label for="tweet-real-name">Real Name</label><br />
-				<input type="checkbox" id="tweet-handle" checked="checked" /><label for="tweet-handle">Twitter @Handle</label><br />
-				<input type="checkbox" id="tweet-time" checked="checked" /><label for="tweet-time">Post Time</label><br />
-				<input type="checkbox" id="tweet-link" /><label for="tweet-link">Link to Source</label><br />
+				<input type="checkbox" id="tweet-real-name" checked="checked" tabindex="2" /><label for="tweet-real-name">Real Name</label><br />
+				<input type="checkbox" id="tweet-handle" checked="checked" tabindex="3" /><label for="tweet-handle">Twitter @username</label><br />
+				<input type="checkbox" id="tweet-time" checked="checked" tabindex="4" /><label for="tweet-time">Post Time</label><br />
+				<input type="checkbox" id="tweet-link" tabindex="5" /><label for="tweet-link">Link to Source</label><br />
 
-				<button type="submit" class="radius">Retrieve</button>
+				<button type="submit" class="radius" id="config-submit" tabindex="6">Retrieve</button>
+
+				<div id="spinner"></div>
 			</form>
 		</div>
 	</div>
 </div>
 
-<div id="storify-output"></div>
+<div id="storify-output" class="hide">
+	<dl class="tabs" data-tab>
+		<dd class="active"><a href="#output-tweets">Tweets</a></dd>
+		<dd><a href="#output-citations">Citations</a></dd>
+	</dl>
+	<div class="tabs-content">
+		<div class="content active" id="output-tweets">
+			<h4>Tweets</h4>
+			<p class="subheader">Storify tweets in plain text.</p>
+			<div id="tweet-content"></div>
+		</div>
+		<div class="content" id="output-citations">
+			<h4>Citations</h4>
+			<p class="subheader">Storify tweets in the citation format of your choice.</p>
+			<div class="citation-format-wrap panel radius">
+				<label for="citation-format">Citation Format:</label>
+				<select id="citation-format">
+					<option value="mla">MLA</option>
+					<option value="chicago">Chicago Manual of Style</option>
+					<option value="apa">APA</option>
+				</select>
+			</div>
+
+			<div id="citation-content"></div>
+		</div>
+	</div>
+</div>
 
 
 <div id="embedded-help" class="reveal-modal" data-reveal>
@@ -41,6 +69,18 @@
 	<img src="img/storify_screenshot.png" alt="Storify embed screenshot" class="screenshot" />
 
 	<p>This will take you to the Storify web site. Copy this Storify page's URL into the Storify URL field in Textify.</p>
+
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="error-ratelimit" class="reveal-modal medium" data-reveal>
+	<h3>Too Many Tweets!</h3>
+	<p>Twitter limits the number of tweets Textify can request to 180 tweets every 15 minutes for all users.</p>
+
+	<div id="early-warning" class="hide"></div>
+	<div id="late-warning">
+		<p>This limit has been reached. Try again later, when Twitter has reset Textify's quota.</p>
+	</div>
 
 	<a class="close-reveal-modal">&#215;</a>
 </div>

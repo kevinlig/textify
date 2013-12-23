@@ -1,10 +1,14 @@
 require.config({ 
-    paths: { 
+    paths: {
+        text: "vendor/text",
         jquery: "vendor/jquery",
         underscore: "vendor/underscore-min", 
         backbone: "vendor/backbone-min",
         handlebars: "vendor/handlebars",
-        foundation: "vendor/foundation.min"
+        foundation: "vendor/foundation.min",
+        moment: "vendor/moment.min",
+        scrollTo: "vendor/jquery.scrollTo.min",
+        spin: "vendor/spin.min"
     },
     shim: {
         backbone: {
@@ -18,6 +22,9 @@ require.config({
         underscore: {
             exports: '_'
         },
+        scrollTo: {
+            deps: ['jquery']
+        }
 
     }
 }); 
@@ -28,7 +35,8 @@ require([
     'backbone',
     'handlebars',
     'foundation',
-    'app/app'
+    'app/app',
+    'scrollTo'
     ], 
     function($,_, Backbone, handlebars, foundation, App){
         $(document).ready(function(){

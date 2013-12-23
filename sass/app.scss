@@ -28,3 +28,63 @@
 .hiddenAlert {
 	display:none !important;
 }
+
+.tabs {
+	dd {
+		border: 1px solid #efefef;
+	}
+}
+
+.tabs-content {
+	border-top: 1px solid #efefef;
+}
+
+#spinner {
+	height:30px;
+	width:30px;
+	display:inline-block;
+	
+	.spinner {
+		top:-10px;
+		left:-10px;
+	}
+}
+
+button {
+	&.disabled {
+		background-color:#838383 !important;
+		opacity: 0.5 !important;
+	}
+}
+
+
+ul.tweets {
+	list-style-type: none;
+	margin-left:0;
+	padding-left:0;
+	li {
+		margin-top:5px;
+		padding:10px 0px;
+		border-bottom:#efefef;
+
+		&:first-child {
+			margin-top:0px;
+		}
+
+		&:nth-child(odd) {
+			background-color:#efefef;
+		}
+
+		.row, .tweet-text, .tweet-link {
+			padding:0px 10px;
+		}
+		.tweet-time {
+			text-align:right;
+		}
+
+		.row, .tweet-link {
+			font-size:0.8em;
+		}
+	}
+
+}
