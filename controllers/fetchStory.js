@@ -203,6 +203,7 @@ module.exports = function(app) {
 		}
 		else {
 			// we're in production, twitter authorization is an environment variable
+			console.log("hi");
 			return process.env.TWIITERAUTH;
 		}
 	}

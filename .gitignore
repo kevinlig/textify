@@ -17,3 +17,5 @@ node_modules
 .sass-cache/
 tmp/*
 credentials/credentials.json
+
+public/reference.json
