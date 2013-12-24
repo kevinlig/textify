@@ -1,0 +1,55 @@
+<ul class="citations">
+	<% _.each(results, function(tweet, i) { %>
+		<li tweet-id="<%= tweet.get('tweetId') %>">
+			<% if (citationStyle == "mla") { %>
+
+
+				<% if (tweet.get('lastName') != "") { %>
+					<% if (tweet.get('firstName') == "") { %>
+						<%= tweet.get('lastName') %>
+					<% } else { %>
+						<%= tweet.get('lastName') %>, <%= tweet.get('firstName') %>
+					<% } %>
+					(<%= tweet.get('twitterHandle') %>).
+				<% } else { %>
+					<%= tweet.get('twitterHandle') %> (<%= tweet.get('twitterHandle') %>).
+				<% } %>
+
+				"<%= tweet.get('text') %>" <%= tweet.get('timestamp').local().format("D MMM YYYY, h:mm a") %>. Tweet.
+
+
+			<% } else if (citationStyle == "chicago") { %>	
+
+				<% if (tweet.get('lastName') != "") { %>
+					<% if (tweet.get('firstName') == "") { %>
+						<%= tweet.get('lastName') %>,
+					<% } else { %>
+						<%= tweet.get('firstName') %> <%= tweet.get('lastName') %>,
+					<% } %>
+					Twitter post,
+				<% } else { %>
+					<%= tweet.get('twitterHandle') %>, Twitter post,
+				<% } %>
+
+				<%= tweet.get('timestamp').local().format("MMMM D, YYYY, h:mm a") %>, http://twitter.com/<%= tweet.get('twitterHandle') %>.
+
+
+			<% } else { %>
+
+				<% if (tweet.get('lastName') != "") { %>
+					<% if (tweet.get('firstName') == "") { %>
+						<%= tweet.get('lastName') %>
+					<% } else { %>
+						<%= tweet.get('lastName') %>, <%= tweet.get('firstName') %>
+					<% } %>
+					[<%= tweet.get('twitterHandle') %>].
+				<% } else { %>
+					<%= tweet.get('twitterHandle') %> [<%= tweet.get('twitterHandle') %>].
+				<% } %>
+
+				(<%= tweet.get('timestamp').local().format("YYYY, MMMM D") %>). <%= tweet.get('text') %> [Tweet]. Retrieved from <%= tweet.get('permalink') %>
+
+			<% } %>
+		</li>
+	<% }); %>
+</ul>

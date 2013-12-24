@@ -50,6 +50,10 @@
 	}
 }
 
+#output-citations, #output-tweets {
+	width:100%;
+}
+
 button {
 	&.disabled {
 		background-color:#838383 !important;
@@ -57,11 +61,11 @@ button {
 	}
 }
 
-
-ul.tweets {
+ul.tweets, ul.citations {
 	list-style-type: none;
 	margin-left:0;
 	padding-left:0;
+
 	li {
 		margin-top:5px;
 		padding:10px 0px;
@@ -75,16 +79,28 @@ ul.tweets {
 			background-color:#efefef;
 		}
 
-		.row, .tweet-text, .tweet-link {
+		.row, .tweet-text, .tweet-link, .solo {
 			padding:0px 10px;
 		}
 		.tweet-time {
 			text-align:right;
+			@media only screen and (max-width: 40em) {
+				text-align:left;
+			}
+
+			&.solo {
+				text-align:left;
+			}
 		}
 
-		.row, .tweet-link {
+		.row, .tweet-link, .solo {
 			font-size:0.8em;
 		}
 	}
 
+	&.citations {
+		li {
+			padding:10px;
+		}
+	}
 }

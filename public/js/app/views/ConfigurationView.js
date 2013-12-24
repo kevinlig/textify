@@ -8,12 +8,14 @@ define([
 	'app/models/ConfigurationModel',
 	'app/models/ResultsModel',
 	'app/collections/ResultsCollection',
-	'app/views/ResultsView'],
-function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, ResultsCollection, ResultsView) {
+	'app/views/ResultsView',
+	'app/views/CitationsView'],
+function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, ResultsCollection, ResultsView, CitationsView) {
 	var ConfigurationView = Backbone.View.extend({
 		el: "#storifyRequest",
 		events: {
-			'submit': 'submit'
+			'submit': 'submit',
+			'change input[type=checkbox]': 'changeConfig'
 		},
 		initialize: function() {
 			// check if the configuration model already exists to prevent zombie objects
@@ -24,6 +26,15 @@ function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, Resu
 			else {
 				// does not exist, create a new model
 				this.model = new ConfigurationModel({});
+			}
+		},
+		changeConfig: function(event) {
+			var changedCheckbox = $(event.target);
+			this.model.set(changedCheckbox.attr("data-model-attr"), changedCheckbox.is(":checked"));
+
+			// if the results view is displayed, update it as well
+			if (!$("#storify-output").hasClass("hide")) {
+				window.app.views.resultsView.render();
 			}
 		},
 		submit: function() {
@@ -97,11 +108,12 @@ function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, Resu
 
 			this.model.set('feedUser',urlElements[0]);
 			this.model.set('feedStory',urlElements[1]);
+			
 			// get the display options
-			this.model.set('displayName',$("#tweet-real-name").prop("checked"));
-			this.model.set('displayHandle',$("#tweet-handle").prop("checked"));
-			this.model.set('displayTime',$("#tweet-time").prop("checked"));
-			this.model.set('displaySource',$("#tweet-link").prop("checked"));
+			this.model.set('displayName',$("#tweet-real-name").is(":checked"));
+			this.model.set('displayHandle',$("#tweet-handle").is(":checked"));
+			this.model.set('displayTime',$("#tweet-time").is(":checked"));
+			this.model.set('displaySource',$("#tweet-link").is(":checked"));
 
 			// show spinner
 			this.startSpinner();
@@ -244,6 +256,28 @@ function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, Resu
 					tweetModel.set("text","[Tweet could not be retrieved]");
 				}
 
+				// determine if a first name/last name is available (for citation)
+				var realname = currentTweet.realName;
+				if (realname.indexOf(" ") > -1) {
+					// at least one space exists
+					// get the last name
+					var nameArray = realname.split(" ");
+					tweetModel.set("lastName", nameArray[nameArray.length - 1]);
+
+					// get the remaining name
+					var remainingName = "";
+					for (var j = 0; j < nameArray.length - 1; j++) {
+						remainingName += nameArray[j];
+						if (j < nameArray.length - 2) {
+							remainingName += " ";
+						}
+					}
+					tweetModel.set("firstName", remainingName);
+				}
+				else if (realname != "") {
+					tweetModel.set("lastName", realname);
+				}
+
 				// write into collection object
 				tweetCollection.add(tweetModel);
 			}
@@ -251,9 +285,23 @@ function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, Resu
 			// okay, we don't need the results attribute in the config model any more
 			this.model.unset("results");
 
+			var self = this;
+
 			if (typeof window.app.views.resultsView == "undefined") {
 				// create the results view
+				// we need to also include the configuration information, so we're going to cheat the collection a bit
 				window.app.views.resultsView = new ResultsView({
+					collection: {
+						results: tweetCollection,
+						configuration: this.model
+					}
+				});
+			}
+
+			if (typeof window.app.views.citationsView == "undefined") {
+				// create the citation view
+				// no need for configuration information this time though!
+				window.app.views.citationsView = new CitationsView({
 					collection: tweetCollection
 				});
 			}
@@ -263,6 +311,7 @@ function($, Backbone, _, Spinner, moment, ConfigurationModel, ResultsModel, Resu
 
 			// render out the new data
 			window.app.views.resultsView.render();
+			window.app.views.citationsView.render();
 
 
 			// display the results

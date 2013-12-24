@@ -20,10 +20,10 @@
 				</div>
 
 				<label>Include these fields:</label>
-				<input type="checkbox" id="tweet-real-name" checked="checked" tabindex="2" /><label for="tweet-real-name">Real Name</label><br />
-				<input type="checkbox" id="tweet-handle" checked="checked" tabindex="3" /><label for="tweet-handle">Twitter @username</label><br />
-				<input type="checkbox" id="tweet-time" checked="checked" tabindex="4" /><label for="tweet-time">Post Time</label><br />
-				<input type="checkbox" id="tweet-link" tabindex="5" /><label for="tweet-link">Link to Source</label><br />
+				<input type="checkbox" id="tweet-real-name" data-model-attr="displayName" checked="checked" tabindex="2" /><label for="tweet-real-name">Real Name</label><br />
+				<input type="checkbox" id="tweet-handle" data-model-attr="displayHandle" checked="checked" tabindex="3" /><label for="tweet-handle">Twitter @username</label><br />
+				<input type="checkbox" id="tweet-time" data-model-attr="displayTime" checked="checked" tabindex="4" /><label for="tweet-time">Post Time</label><br />
+				<input type="checkbox" id="tweet-link" data-model-attr="displaySource" tabindex="5" /><label for="tweet-link">Link to Source</label><br />
 
 				<button type="submit" class="radius" id="config-submit" tabindex="6">Retrieve</button>
 
@@ -47,6 +47,7 @@
 		<div class="content" id="output-citations">
 			<h4>Citations</h4>
 			<p class="subheader">Storify tweets in the citation format of your choice.</p>
+
 			<div class="citation-format-wrap panel radius">
 				<label for="citation-format">Citation Format:</label>
 				<select id="citation-format">
@@ -55,6 +56,7 @@
 					<option value="apa">APA</option>
 				</select>
 			</div>
+		
 
 			<div id="citation-content"></div>
 		</div>

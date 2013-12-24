@@ -19,6 +19,8 @@ module.exports = function(app) {
 	var twitterAPICalls = 180;
 	var twitterAPIReset = 0;
 
+	// hmm looks like environment variables aren't working inside the functions
+	// so we'll do it out here
 	var environmentType = process.env.NODE_ENV;
 	var twitterAPIKey = process.env.TWITTERAUTH;
 
@@ -200,7 +202,7 @@ module.exports = function(app) {
 
 	function twitterAuthorization() {
 		// we need to get our application twitter credentials
-		if (environmentType == "development") {
+		if (environmentType == "development" || environmentType == undefined) {
 			// read the credential file, but only if development environment
 			var rawCredentials = fs.readFileSync('credentials/credentials.json', 'utf8');
 			var credentials = JSON.parse(rawCredentials);

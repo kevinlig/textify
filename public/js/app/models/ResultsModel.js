@@ -10,6 +10,8 @@ function($,Backbone,_) {
 			permalink: "",
 			twitterHandle: "",
 			realName: "",
+			firstName: "",
+			lastName: "",
 			text: "",
 			timestamp: ""
 		}

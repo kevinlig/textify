@@ -17,11 +17,12 @@ app.get('/',function(req,res) {
 	res.render('partials/mainpage');
 });
 
-app.post('/fetchStory2',function(req,res) {
-	var referenceJson = require('fs').readFileSync('./public/reference.json','utf8');
-	res.send(200,referenceJson);
 
-});
+// for development only: read from a stored JSON instead of using our Twitter rate-limited calls
+// app.post('/fetchStory2',function(req,res) {
+// 	var referenceJson = require('fs').readFileSync('./public/reference.json','utf8');
+// 	res.send(200,referenceJson);
+//});
 
 // reference the storify fetching module
 require('./controllers/fetchStory')(app);

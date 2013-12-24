@@ -10,7 +10,10 @@ function($, Backbone, _, moment, ResultsModel, TweetTemplate) {
 	var ResultsView = Backbone.View.extend({
 		el: "#tweet-content",
 		render: function() {
-			var renderedHtml = _.template(TweetTemplate, {results: this.collection.models});
+			var renderedHtml = _.template(TweetTemplate, {
+				results: this.collection.results.models,
+				configuration: this.collection.configuration
+			});
 			this.$el.html(renderedHtml);
 		}
 	});

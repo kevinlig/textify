@@ -2,20 +2,45 @@
 	<% _.each(results, function(tweet, i) { %>
 
 		<li tweet-id="<%= tweet.get('tweetId') %>">
-			<div class="row">
-				<div class="small-12 medium-8 columns tweet-user">
-					<b><%= tweet.get('realName') %></b> @<%= tweet.get('twitterHandle') %>
+			<% // special case where timestamp and at least one of the names appears, will need the Foundation grid system %>
+			<% if ((configuration.get('displayName') != "" || configuration.get('displayHandle')) && configuration.get('displayTime')) { %>
+				<div class="row">
+					<div class="small-12 medium-7 columns tweet-user">
+						<% if (configuration.get('displayName')) { %>
+							<b><%= tweet.get('realName') %></b>
+						<% } %>
+						<% if (configuration.get('displayHandle')) { %>
+							@<%= tweet.get('twitterHandle') %>
+						<% } %> 
+					</div>
+					<div class="small-12 medium-5 columns tweet-time">
+						<%= tweet.get('timestamp').local().format("MMMM D, YYYY") %> at <%= tweet.get('timestamp').local().format("h:mm A") %> 
+					</div>
 				</div>
-				<div class="small-12 medium-4 columns tweet-time">
-					<%= tweet.get('timestamp').local().format("MMMM D, YYYY") %> at <%= tweet.get('timestamp').local().format("h:mm A") %> 
-				</div>
-			</div>
+			<% } else { %>
+				<% if (configuration.get('displayName') || configuration.get('displayHandle')) { %>
+					<div class="tweet-user solo">
+						<% if (configuration.get('displayName')) { %>
+							<b><%= tweet.get('realName') %></b>
+						<% } %>
+						<% if (configuration.get('displayHandle')) { %>
+							@<%= tweet.get('twitterHandle') %>
+						<% } %> 
+					</div>
+				<% } else if (configuration.get('displayTime')) { %>
+					<div class="tweet-time solo">
+						<%= tweet.get('timestamp').local().format("MMMM D, YYYY") %> at <%= tweet.get('timestamp').local().format("h:mm A") %> 
+					</div>
+				<% } %>
+			<% } %>
 			<div class="tweet-text">
 				<%= tweet.get('text') %>
 			</div>
-			<div class="tweet-link">
-				<a href="<%= tweet.get('permalink') %>" target="_blank"><%= tweet.get('permalink') %></a>
-			</div>
+			<% if (configuration.get('displaySource')) { %>
+				<div class="tweet-link">
+					<a href="<%= tweet.get('permalink') %>" target="_blank"><%= tweet.get('permalink') %></a>
+				</div>
+			<% } %>
 		</li>
 
 	<% }); %>

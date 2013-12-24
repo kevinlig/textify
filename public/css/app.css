@@ -8316,41 +8316,60 @@ table {
   left: -10px;
 }
 
-/* line 54, ../../sass/app.scss */
+/* line 53, ../../sass/app.scss */
+#output-citations, #output-tweets {
+  width: 100%;
+}
+
+/* line 58, ../../sass/app.scss */
 button.disabled {
   background-color: #838383 !important;
   opacity: 0.5 !important;
 }
 
-/* line 61, ../../sass/app.scss */
-ul.tweets {
+/* line 64, ../../sass/app.scss */
+ul.tweets, ul.citations {
   list-style-type: none;
   margin-left: 0;
   padding-left: 0;
 }
-/* line 65, ../../sass/app.scss */
-ul.tweets li {
+/* line 69, ../../sass/app.scss */
+ul.tweets li, ul.citations li {
   margin-top: 5px;
   padding: 10px 0px;
   border-bottom: #efefef;
 }
-/* line 70, ../../sass/app.scss */
-ul.tweets li:first-child {
+/* line 74, ../../sass/app.scss */
+ul.tweets li:first-child, ul.citations li:first-child {
   margin-top: 0px;
 }
-/* line 74, ../../sass/app.scss */
-ul.tweets li:nth-child(odd) {
+/* line 78, ../../sass/app.scss */
+ul.tweets li:nth-child(odd), ul.citations li:nth-child(odd) {
   background-color: #efefef;
 }
-/* line 78, ../../sass/app.scss */
-ul.tweets li .row, ul.tweets li .tweet-text, ul.tweets li .tweet-link {
+/* line 82, ../../sass/app.scss */
+ul.tweets li .row, ul.tweets li .tweet-text, ul.tweets li .tweet-link, ul.tweets li .solo, ul.citations li .row, ul.citations li .tweet-text, ul.citations li .tweet-link, ul.citations li .solo {
   padding: 0px 10px;
 }
-/* line 81, ../../sass/app.scss */
-ul.tweets li .tweet-time {
+/* line 85, ../../sass/app.scss */
+ul.tweets li .tweet-time, ul.citations li .tweet-time {
   text-align: right;
 }
-/* line 85, ../../sass/app.scss */
-ul.tweets li .row, ul.tweets li .tweet-link {
+@media only screen and (max-width: 40em) {
+  /* line 85, ../../sass/app.scss */
+  ul.tweets li .tweet-time, ul.citations li .tweet-time {
+    text-align: left;
+  }
+}
+/* line 91, ../../sass/app.scss */
+ul.tweets li .tweet-time.solo, ul.citations li .tweet-time.solo {
+  text-align: left;
+}
+/* line 96, ../../sass/app.scss */
+ul.tweets li .row, ul.tweets li .tweet-link, ul.tweets li .solo, ul.citations li .row, ul.citations li .tweet-link, ul.citations li .solo {
   font-size: 0.8em;
+}
+/* line 102, ../../sass/app.scss */
+ul.tweets.citations li, ul.citations.citations li {
+  padding: 10px;
 }
